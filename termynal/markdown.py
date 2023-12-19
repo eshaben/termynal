@@ -175,7 +175,7 @@ class Termynal:
 class TermynalPreprocessor(Preprocessor):
     """Converts fenced code blocks to termynal HTML."""
 
-    ty_comment = re.compile(r"<!--\s*\*?termynal\*?-->(.*?)```", re.DOTALL)
+    ty_comment = re.compile(r"^\s*<!--\s*termynal:?(.*)-->", re.MULTILINE)
     marker = "9HDrdgVBNLga"
     FENCED_BLOCK_RE = re.compile(
         dedent(
@@ -196,6 +196,7 @@ class TermynalPreprocessor(Preprocessor):
         ),
         re.MULTILINE | re.DOTALL | re.VERBOSE,
     )
+
 
     def __init__(self, config: Config, md: "core.Markdown"):
         super(TermynalPreprocessor, self).__init__(md=md)
